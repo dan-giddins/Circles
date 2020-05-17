@@ -11,25 +11,41 @@ public class DiskInstantiator : MonoBehaviour
 	void Start()
 	{
 		Generate6(new Vector3(0, 0, 0));
-		//Generate14(new Vector3(2, 0, 0));
+		Generate14(new Vector3(4, 0, 0));
 	}
 
 	private void Generate14(Vector3 centre)
 	{
-		throw new NotImplementedException();
+		const float scale = 1;
+		// 6
+		InstantiateAndScale(centre, 1, 0, 0, 0, 90, 0, scale);
+		InstantiateAndScale(centre, -1, 0, 0, 0, 90, 0, scale);
+		InstantiateAndScale(centre, 0, 1, 0, 90, 0, 0, scale);
+		InstantiateAndScale(centre, 0, -1, 0, 90, 0, 0, scale);
+		InstantiateAndScale(centre, 0, 0, 1, 0, 0, 0, scale);
+		InstantiateAndScale(centre, 0, 0, -1, 0, 0, 0, scale);
+		// 8
+		InstantiateAndScale(centre, GetPos(45), GetPos(45), GetPos(45), -45, 45, 0, scale);
 	}
+
+	private float GetPos(float angle) =>
+		(float) Math.Pow(Math.Sin(ConvertToRadians(angle)),1.5);
+
+	public double ConvertToRadians(float angle) =>
+		Math.PI / 180 * angle;
 
 	private void Generate6(Vector3 centre)
 	{
-		InstantiateAndSize(centre, 0.5f, 0, 0, 0, 90, 0, 1);
-		InstantiateAndSize(centre, -0.5f, 0, 0, 0, 90, 0, 1);
-		InstantiateAndSize(centre, 0, 0.5f, 0, 90, 0, 0, 1);
-		InstantiateAndSize(centre, 0, -0.5f, 0, 90, 0, 0, 1);
-		InstantiateAndSize(centre, 0, 0, 0.5f, 0, 0, 0, 1);
-		InstantiateAndSize(centre, 0, 0, -0.5f, 0, 0, 0, 1);
+		const float scale = 2;
+		InstantiateAndScale(centre, 1, 0, 0, 0, 90, 0, scale);
+		InstantiateAndScale(centre, -1, 0, 0, 0, 90, 0, scale);
+		InstantiateAndScale(centre, 0, 1, 0, 90, 0, 0, scale);
+		InstantiateAndScale(centre, 0, -1, 0, 90, 0, 0, scale);
+		InstantiateAndScale(centre, 0, 0, 1, 0, 0, 0, scale);
+		InstantiateAndScale(centre, 0, 0, -1, 0, 0, 0, scale);
 	}
 
-	private void InstantiateAndSize(
+	private void InstantiateAndScale(
 		Vector3 centre,
 		float xPos,
 		float yPos,
