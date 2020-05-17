@@ -28,18 +28,21 @@ public class DiskInstantiator : MonoBehaviour
 
 	private void Generate6(Vector3 centre)
 	{
-		RotateDisk(CreateAndMoveDisk(centre, new Vector3(0.5f, 0, 0)), new Vector3(0, 90, 0));
-		RotateDisk(CreateAndMoveDisk(centre, new Vector3(-0.5f, 0, 0)), new Vector3(0, 90, 0));
-		RotateDisk(CreateAndMoveDisk(centre, new Vector3(0, 0.5f, 0)), new Vector3(90, 0, 0));
-		RotateDisk(CreateAndMoveDisk(centre, new Vector3(0, -0.5f, 0)), new Vector3(90, 0, 0));
-		CreateAndMoveDisk(centre, new Vector3(0, 0, 0.5f));
-		CreateAndMoveDisk(centre, new Vector3(0, 0, -0.5f));
+		Instantiate(DiskObject, Position(centre, 0.5f, 0, 0), Quaternion.Euler(new Vector3(0, 90, 0)));
+		Instantiate(DiskObject, Position(centre, -0.5f, 0, 0), Quaternion.Euler(new Vector3(0, 90, 0)));
+		Instantiate(DiskObject, Position(centre, 0, 0.5f, 0), Quaternion.Euler(new Vector3(90, 0, 0)));
+		Instantiate(DiskObject, Position(centre, 0, -0.5f, 0), Quaternion.Euler(new Vector3(90, 0, 0)));
+		Instantiate(DiskObject, Position(centre, 0, 0, 0.5f), Quaternion.Euler(new Vector3(0, 0, 0)));
+		Instantiate(DiskObject, Position(centre, 0, 0, -0.5f), Quaternion.Euler(new Vector3(0, 0, 0)));
 	}
+
+	private Vector3 Position(Vector3 centre, float x, float y, float z) =>
+		centre + new Vector3(x, y, z);
 
 	private void RotateDisk(GameObject disk, Vector3 rotation) =>
 		disk.transform.Rotate(rotation);
 
-	private GameObject CreateAndMoveDisk(Vector3 centre, Vector3 offset)
+	private GameObject CreateAndMoveDisk(Vector3 centre, Vector3 offset, float size)
 	{
 		var disk = Instantiate(DiskObject);
 		disk.transform.localPosition = centre + offset;
