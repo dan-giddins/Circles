@@ -11,7 +11,7 @@ public class DiskInstantiator : MonoBehaviour
 	void Start()
 	{
 		Generate6(new Vector3(0, 0, 0));
-		Generate14(new Vector3(4, 0, 0));
+		//Generate14(new Vector3(4, 0, 0));
 	}
 
 	private void Generate14(Vector3 centre)
@@ -46,12 +46,14 @@ public class DiskInstantiator : MonoBehaviour
 		float scale, 
 		int i)
 	{
-		// Create parent
-		var parent = Instantiate(new GameObject(), new Vector3(), Quaternion.Euler(new Vector3(xRot, yRot)), sphere.transform);
+		// create parent
+		var parent = Instantiate(new GameObject(), sphere.transform);
 		parent.name = $"{sphere.name}_{i}_parent";
-		// Create disk
-		var disk = Instantiate(DiskObject, new Vector3(0, 0, 1), new Quaternion(), parent.transform);
+		// create disk
+		var disk = Instantiate(DiskObject, new Vector3(0, 0, -1), new Quaternion(), parent.transform);
 		disk.transform.localScale *= scale;
 		disk.name = $"{sphere.name}_{i}_disk";
+		// rotate parent
+		parent.transform.rotation = Quaternion.Euler(new Vector3(xRot, yRot));
 	}
 }
