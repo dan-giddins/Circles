@@ -13,13 +13,13 @@ public class DiskInstantiator : MonoBehaviour
 	void Start()
 	{
 		// 6
-		Generate6(CreateSphere(new Vector3(0, 0, 0), 6), 2);
+		Generate6(CreateSphere(new Vector3(0, 0, 0), 6), 20);
 		// 14
-		Generate14(CreateSphere(new Vector3(4, 0, 0), 14), 1.025f);
+		//Generate14(CreateSphere(new Vector3(4, 0, 0), 14), 1.025f);
 		// 26
-		Generate26(CreateSphere(new Vector3(8, 0, 0), 26), 0.625f);
+		//Generate26(CreateSphere(new Vector3(8, 0, 0), 26), 0.625f);
 		// 50
-		Generate50(CreateSphere(new Vector3(12, 0, 0), 50), 0.4f);
+		//Generate50(CreateSphere(new Vector3(12, 0, 0), 50), 0.475f);
 	}
 
 	private void Generate50(GameObject sphere, float scale)
@@ -106,7 +106,7 @@ public class DiskInstantiator : MonoBehaviour
 		var parent = Instantiate(new GameObject(), sphere.transform);
 		parent.name = $"{sphere.name}_parent";
 		// create disk
-		var disk = Instantiate(DiskObject, parent.transform.position + new Vector3(0, 0, -1), new Quaternion(), parent.transform);
+		var disk = Instantiate(DiskObject, parent.transform.position + new Vector3(0, 0, -10), new Quaternion(), parent.transform);
 		disk.transform.localScale *= scale;
 		disk.name = $"{sphere.name}_disk";
 		// rotate parent
